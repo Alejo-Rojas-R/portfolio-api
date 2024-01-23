@@ -5,7 +5,7 @@ const projectSchema = new Schema({
     deploy_link: { type: String },
     thumbnail_link: { type: String },
     description: { type: String, required: true },
-    badges: { type: Array },
+    badges: { type: Array, required: true },
     github_link: { type: String },
 }, { timestamps: true });
 
