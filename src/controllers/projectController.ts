@@ -87,22 +87,18 @@ export const updateProject: RequestHandler<UpdateParams, unknown, ProjectBody, u
             throw createHttpError(400, "Invalid project id")
         }
 
-        if (!title || !description || !badges) {
-            throw createHttpError(400, "Project must have title, description and badges");
-        }
-
         const project = await ProjectModel.findById(projectId).exec();
 
         if (!project) {
             throw createHttpError(404, "Project not found")
         }
 
-        project.title = title;
-        project.description = description;
-        project.badges = badges;
-        project.deploy_link = deployLink;
-        project.thumbnail_link = thumbnailLink;
-        project.github_link = githubLink;
+        project.title = title ?? project.title;
+        project.description = description ?? project.description;
+        project.badges = badges ?? project.badges;
+        project.deploy_link = deployLink ?? project.deploy_link;
+        project.thumbnail_link = thumbnailLink ?? project.thumbnail_link;
+        project.github_link = githubLink ?? project.github_link;
 
         const updatedProject = await project.save();
 

@@ -11,4 +11,6 @@ mongoose.connect(env.MONGO_CONNECTION_STRING)
             console.log("server running on port: " + port);
         });
     })
-    .catch(console.error);
+    .catch((error) => {
+        console.error('Error connecting to MongoDB Atlas:', error.message);
+    });
